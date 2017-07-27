@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="theme-next muse use-motion">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>liukelin - A-start 最短寻路demo</title>
+<style type="text/css">
+/*table.hovertable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px;
+    border-color: #999999;
+    border-collapse: collapse;
+}
+table.hovertable th {
+    background-color:#c3dde0;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}*/
+/*table.hovertable tr {
+    background-color:#d4e3e5;
+}*/
+table.hovertable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}
+
+table.hovertable td:hover{
+    /*background-color: red ;*/
+    border:1px solid red;
+}
+</style>
+
+<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+
+<body style="padding:5px 15px">
+<h3>基于a-start的最短距离计算</h3>
+<div style="padding:5px 0">
+    表格大小:
+    x:<input type="text" id="map_width" value="12" > - y:<input type="text" id="map_height" value="12" > 
+    <input type="button" name="" value="创建" id="create_maps" onClick="create_maps();" >
+    &nbsp;--&nbsp;
+    <input type="button" name="" value="设置障碍物" onClick="set_action(1);" style="border:2px solid black;">
+    <input type="button" name="" value="设置起点" onClick="set_action(2);" style="border:2px solid yellow;">
+    <input type="button" name="" value="设置终点" onClick="set_action(3);" style="border:2px solid blue;">
+    <label><input id="is_agree" type="checkbox" value="1" />允许斜向通过</label>
+    <input type="button" name="" id="gen_path" value="生成路径" style="border:2px solid green;">
+
+    <!-- <input type="button" name="" id="" value="测试" onClick="test()"> -->
+</div>
+
+<div>
+<!-- Table goes in the document BODY -->
+<table class="hovertable" id="maps">
+    
+</table>
+
+</div>
+
+<input type="hidden" name="" id="action" value="1"><!-- 当前操作 1设置障碍 2设置起点 3设置终点 -->
+<input type="hidden" name="" id="location_hindrance" ><!-- 障碍物 -->
+<input type="hidden" name="" id="location_begin"><!-- 起点 -->
+<input type="hidden" name="" id="location_end" ><!-- 终点 -->
+
+<script type="text/javascript">
+
+    function test(){
+        alert($("#is_agree").is(":checked")?1:0);
+    }
+
+    // 生成地图
+    function create_maps(){
+        var map_width = $('#map_width').val();
+        var map_height = $('#map_height').val();
+        if (isNaN(map_width) || isNaN(map_height) || parseInt(map_width)<=0 || parseInt(map_height)<=0) {
+            alert('地图大小值请输入大于0数字');
+            return false;
+        }
+
+        // alert(map_width,map_height);
+        // $('#maps').html('');
+        $('#action').val('1');
+        $('#location_hindrance').val('');
+        $('#location_begin').val('');
+        $('#location_end').val('');
+        var maps = '';
+        for (var x=0; x<map_width; x++){
+            maps += '<tr>';
+            for (var y=0; y<map_height; y++){
+                maps += '<td class="location_td" onClick="location_td_click(this)" x="'+x+'" y="'+y+'" id="location_'+x+'-'+y+'" ><span>('+x+','+y+')</span></td>';
+            }
+            maps += '</tr>';
+        }
+        $('#maps').html(maps);
+    }
+
+    
+    // 记录设置动作
+    function set_action(action){
+        // alert(action);
+        $('#action').val(action);
+    }
+
+    // 坐标设置 （单击设置障碍物、起点、终点）
+    function location_td_click(t){
+    
+       x = $(t).attr('x');
+       y = $(t).attr('y');
+       // alert($(t).attr('x'));
+       
+       $(t).attr('is_path',''); // 清除路径标识
+       action = parseInt($('#action').val());
+       if (action==1) { // 设置障碍物
+            $('#location_hindrance').val($('#location_hindrance').val() +'|'+x+'-'+y);
+            $(t).attr('style',"background-color: black;");
+
+       }else if(action==2){ // 设置起点
+            // 将旧设置清空
+            $('#location_'+ $('#location_begin').val()).attr('style','');
+
+            $('#location_begin').val(x+'-'+y);
+            $(t).attr('style', "background-color: yellow;");
+
+       }else if(action==3){ // 设置终点
+            // 将旧设置清空
+            $('#location_'+ $('#location_end').val()).attr('style','');
+
+            $('#location_end').val(x+'-'+y);
+            $(t).attr('style','background-color: blue;');
+
+       }
+
+    }
+
+    /**
+    // 记录障碍物设置
+    function location_hindrance(){
+        $('#location_hindrance');
+    }
+
+    // 记录终点起点设置
+    function location_begin(location){
+        $('#location_begin').val(location);
+    }
+
+    // 记录终点起点设置
+    function location_end(location){
+        $('#location_end').val(location);
+    }
+    **/
+
+    $(function(){
+        create_maps();
+
+    　　$("#create_maps").click(function(){
+           create_maps();
+        });
+
+        $('#gen_path').click(function(){
+            $.ajax({
+                type: 'POST',
+                data:{
+                    map_width:$('#map_width').val(),
+                    map_height:$('#map_height').val(),
+                    location_hindrance:$('#location_hindrance').val(),
+                    location_begin:$('#location_begin').val(),
+                    location_end:$('#location_end').val(),
+                    is_agree: $("#is_agree").is(":checked")?1:0
+                },
+                url: 'a_start.php',
+                dataType: 'json',
+                success: function(data){
+                    if (data.c>=0) {
+                        if (data.path && data.path.length>0) {
+                            // 初始化旧路径
+                            $("td[is_path=1]").attr('style','');
+
+                            $.each(data.path,function(key,value){
+                                //标记路径
+                                $('#location_'+value.x+'-'+value.y).attr('style','background-color: green;');
+                                $('#location_'+value.x+'-'+value.y).attr('is_path','1');
+                            });
+                        }else{
+                            alert('获取路径失败');
+                        }
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+
+    });
+
+    
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
