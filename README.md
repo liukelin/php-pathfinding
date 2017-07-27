@@ -19,4 +19,4 @@
 
 demo地址
     
-    http://liukelin.top/php/a_start.html 
+    http://demo.liukelin.top/php-pathfinding/a_start.html 
