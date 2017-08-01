@@ -17,6 +17,5 @@
     5、最终到达终点坐标，结束.
 
 
-demo地址
-    
-    http://demo.liukelin.top/php-pathfinding/a_start.html 
+demo地址：
+    [点击这里你可以链接到http://demo.liukelin.top/php-pathfinding/a_start.html](http://demo.liukelin.top/php-pathfinding/a_start.html )<br />
