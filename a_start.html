@@ -36,6 +36,13 @@ table.hovertable td:hover{
     /*background-color: red ;*/
     border:1px solid red;
 }
+.footer{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    min-height: 50px;
+}
 </style>
 
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
@@ -70,6 +77,12 @@ table.hovertable td:hover{
 <input type="hidden" name="" id="location_begin"><!-- 起点 -->
 <input type="hidden" name="" id="location_end" ><!-- 终点 -->
 
+
+<footer class="footer">
+<div style="width:100%;text-align: center;margin: 20px auto">
+<a href="https://github.com/liukelin/php-pathfinding" target="_blank">GitHub/liukelin</a>
+</div>
+</footer>
 <script type="text/javascript">
 
     function test(){
