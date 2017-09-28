@@ -75,7 +75,8 @@ if ($location_hindrance) {
 
 
 
-
+@include_once('Maps.php');
+@include_once('Paths.php');
 // 生成地图 对象 并标记障碍物、起点、终点
 $mapsObj = new Maps($map_width, $map_height, $hindrance, $location_begin, $location_end);
 
