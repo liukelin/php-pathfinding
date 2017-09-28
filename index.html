@@ -192,7 +192,7 @@ table.hovertable td:hover{
                     location_end:$('#location_end').val(),
                     is_agree: $("#is_agree").is(":checked")?1:0
                 },
-                url: '/service/api.php',
+                url: 'service/api.php',
                 dataType: 'json',
                 success: function(data){
                     if (data.c>=0) {
