@@ -31,4 +31,4 @@
 
 demo地址：
 
-    [https://demo.liukelin.top/php-pathfinding/a_start.html](https://demo.liukelin.top/php-pathfinding)<br />
+    [https://demo.liukelin.top/php-pathfinding](https://demo.liukelin.top/php-pathfinding)<br />
