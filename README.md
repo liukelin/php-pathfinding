@@ -16,7 +16,19 @@
     4、将 F值最小的作为 使用的路径坐标 ->路径坐标集合(path) 、其余周边坐标 ->关闭坐标集合（不可通过坐标 $close_arr）
     5、最终到达终点坐标，结束.
 
+## 目录结构
+
+~~~
+
+├─service/         处理方法
+│  ├─api.php       web接口
+│  ├─Maps.php      绘制地图类
+│  └─Paths.php     寻路生成类
+└─index.html       页面
+
+~~~
+
 
 demo地址：
 
-    [https://demo.liukelin.top/php-pathfinding/a_start.html](https://demo.liukelin.top/php-pathfinding/a_start.html)<br />
+    [https://demo.liukelin.top/php-pathfinding/a_start.html](https://demo.liukelin.top/php-pathfinding)<br />
