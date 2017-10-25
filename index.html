@@ -44,6 +44,8 @@ table.hovertable td:hover{
     width: 100%;
     min-height: 50px;
 }
+
+
 </style>
 
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
@@ -58,10 +60,10 @@ table.hovertable td:hover{
     x:<input type="text" id="map_width" value="12" > - y:<input type="text" id="map_height" value="12" > 
     <input type="button" name="" value="创建" id="create_maps" onClick="create_maps();" >
     &nbsp;--&nbsp;
-    <input type="button" name="" value="设置障碍物" onClick="set_action(1);" style="border:2px solid black;">
-    <input type="button" name="" value="设置起点" onClick="set_action(2);" style="border:2px solid yellow;">
-    <input type="button" name="" value="设置终点" onClick="set_action(3);" style="border:2px solid blue;">
-    <label><input id="is_agree" type="checkbox" value="1" />允许斜向通过</label>
+    <input type="button" name="" title="设置障碍物" value="设置障碍物" onClick="set_action(1);" class="clicks" style="color:black;">
+    <input type="button" name="" title="设置起点" value="设置起点" onClick="set_action(2);" class="clicks" style="color :yellow;">
+    <input type="button" name="" title="设置终点" value="设置终点" onClick="set_action(3);" class="clicks" style="color:blue;">
+    <label><input id="is_agree" type="checkbox" value="1" checked="checked" />允许斜向通过</label>
     <input type="button" name="" id="gen_path" value="生成路径" style="border:2px solid green;">
 
     <!-- <input type="button" name="" id="" value="测试" onClick="test()"> -->
