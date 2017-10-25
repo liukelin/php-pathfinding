@@ -59,11 +59,11 @@ $is_agree = $is_agree; // 0/1
 // 消耗 
 $cost = array(10, 14); //左右, 对角 消耗值 
 
-// 设置起始和结束坐标 
+// 起始和结束坐标 
 $location_begin = $location_begin;
 $location_end = $location_end;
 
-// 设置障碍物坐标 
+// 障碍物坐标 
 $hindrance = array(); 
 if ($location_hindrance) {
     $location_hindrance = array_filter(explode('|', $location_hindrance));
@@ -95,7 +95,7 @@ $pathObj = new Paths($mapsObj, $location_begin, $location_end);
 
 // 重新配置
 $pathObj->is_agree = $is_agree; // 配置是否斜面
-$pathObj->cost = array(10, 14); // 配置正向、斜向 消耗值
+$pathObj->cost = $cost; // 配置正向、斜向 消耗值
 $pathObj->createPath(); // 初始化路径, 修改了配置需要重新初始化路径
 
 $path = $pathObj->getPath(); //获取路径
