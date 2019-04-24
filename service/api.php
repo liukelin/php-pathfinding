@@ -19,7 +19,6 @@ error_reporting(E_ALL | E_STRICT);
 //         'is_agree'=>1
 //     );
 
-
 // 接受参数
 $map_width = (int)$_REQUEST['map_width']; 
 $map_height = (int)$_REQUEST['map_height']; 
@@ -95,7 +94,6 @@ $path = $pathObj->getPath(); //获取路径
 $ret = constants(0);
 $ret['path'] = $path;
 exit(json_encode($ret));
-
 
 function constants($code){
     $CONSTANTS = array(
