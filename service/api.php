@@ -1,9 +1,4 @@
 <?php
-/**
- * API
- * liukelin
- */
-
 set_time_limit(5);
 ini_set("display_errors", "On");
 error_reporting(E_ALL | E_STRICT);
@@ -72,9 +67,6 @@ if ($location_hindrance) {
     }
 }
 
-
-
-
 @include_once('Maps.php');
 @include_once('Paths.php');
 // 生成地图 对象 并标记障碍物、起点、终点
@@ -89,7 +81,6 @@ $mapsObj = new Maps($map_width, $map_height, $hindrance, $location_begin, $locat
 // $mapsObj->createMaps(); // 重新初始化地图
 $maps = $mapsObj->getMaps(); // 获取地图
 
-
 // 生成路径
 $pathObj = new Paths($mapsObj, $location_begin, $location_end);
 
@@ -100,15 +91,10 @@ $pathObj->createPath(); // 初始化路径, 修改了配置需要重新初始化
 
 $path = $pathObj->getPath(); //获取路径
 
-
 //返回json
 $ret = constants(0);
 $ret['path'] = $path;
 exit(json_encode($ret));
-
-
-
-
 
 
 function constants($code){
